@@ -20,7 +20,10 @@ Pacman agents (in search_agents.py).
 from builtins import object
 import util
 import os
-
+from heapq import *
+import sys
+from dataclasses import dataclass, field
+from typing import Any
 def tiny_maze_search(problem):
     """
     Returns a sequence of moves that solves tiny_maze.  For any other maze, the
@@ -88,6 +91,89 @@ def heuristic1(state, problem=None):
         optimisitic_number_of_steps_to_goal = 0
         return optimisitic_number_of_steps_to_goal
 
+class Node():
+    def __init__(self, parent, state, action, g, h):
+        self.parent = parent
+        self.state = state
+        self.action = action
+        self.g = g
+        self.h = h
+        self.path_cost = g + h
+
+    def _cmpkey(self):
+        return self.path_cost
+
+    def _compare(self, other, method):
+        try:
+            return method(self._cmpkey(), other._cmpkey())
+        except (AttributeError, TypeError):
+            # _cmpkey not implemented, or return different type,
+            # so I can't compare with "other".
+            return NotImplemented
+
+    def __lt__(self, other):
+        return self._compare(other, lambda s, o: s < o)
+
+    def __le__(self, other):
+        return self._compare(other, lambda s, o: s <= o)
+
+    def __eq__(self, other):
+        return self._compare(other, lambda s, o: s == o)
+
+    def __ge__(self, other):
+        return self._compare(other, lambda s, o: s >= o)
+
+    def __gt__(self, other):
+        return self._compare(other, lambda s, o: s > o)
+
+    def __ne__(self, other):
+        return self._compare(other, lambda s, o: s != o)
+
+
+class AStar():
+    def __init__(self, problem, heuristic):
+        self.problem = problem
+        self.heuristic = heuristic
+
+    # Returns solution node, or -1 (failure)
+    def search(self):
+        start_state = self.problem.get_start_state()
+        rootNode = Node(None, start_state, None, 0, 0)
+        frontier = [] # Heap queue (Priority queue)
+        heappush(frontier, rootNode)
+        reached = {start_state: rootNode} # Lookup table
+        
+        while len(frontier) > 0:
+            node = heappop(frontier)
+            if(self.problem.is_goal_state(node.state)): return node
+            for child in self.problem.get_successors(node.state):
+                s = child.state
+                # h = heuristic1(childNode.state, problem=FoodSearchProblem)
+                childNode = Node(node, s, child.action, child.cost, 0)
+                if not s in reached.keys() or (childNode.path_cost < reached[s].path_cost):
+                    reached[s] = childNode
+                    heappush(frontier, childNode)
+        return -1
+
+    # Constructs solution array
+    def execute(self):
+        solutionNode = self.search()
+
+        if(solutionNode == -1):
+            print('SOLUTION NOT FOUND. EXITING')
+            sys.exit()
+
+        path = []
+
+        node = solutionNode
+        while node.parent is not None:
+            path.append(node.action)
+            node = node.parent
+
+        path.reverse()
+        return path
+
+
 def a_star_search(problem, heuristic=heuristic1):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
@@ -113,13 +199,22 @@ def a_star_search(problem, heuristic=heuristic1):
     #     ]
     # 
     # Example:
-    #     start_state = problem.get_start_state()
-    #     transitions = problem.get_successors(start_state)
-    #     example_path = [  transitions[0].action  ]
-    #     path_cost = problem.get_cost_of_actions(example_path)
-    #     return example_path
     
-    util.raise_not_defined()
+    # start_state = problem.get_start_state()
+    # print(start_state)
+    # transitions = problem.get_successors(start_state)
+    # print(transitions[0].cost)
+    # example_path = [  transitions[0].action  ]
+    # path_cost = problem.get_cost_of_actions(example_path)
+    # return example_path
+    #
+   
+    astar = AStar(problem, heuristic)
+    solution_path = astar.execute()
+    print(solution_path)
+    return solution_path
+
+    # util.raise_not_defined()
 
 
 # (you can ignore this, although it might be helpful to know about)
