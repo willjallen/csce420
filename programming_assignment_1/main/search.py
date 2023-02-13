@@ -149,7 +149,7 @@ class AStar():
             for child in self.problem.get_successors(node.state):
                 s = child.state
                 # h = heuristic1(childNode.state, problem=FoodSearchProblem)
-                childNode = Node(node, s, child.action, child.cost, 0)
+                childNode = Node(node, s, child.action, node.g + child.cost, 0)
                 if not s in reached.keys() or (childNode.path_cost < reached[s].path_cost):
                     reached[s] = childNode
                     heappush(frontier, childNode)
