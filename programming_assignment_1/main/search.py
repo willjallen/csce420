@@ -295,11 +295,11 @@ def heuristic(state, problem=None):
             position, food_grid = state
 
             if(problem.precomputed['maxFood'] >= 110):
-                return 4*euclidian_dist_each_pellet_heuristic(state, problem) + 0*near_far_heuristic(state, problem) + 1*greedy_heuristic(state, problem)
+                return 4*euclidian_dist_each_pellet_bounded_heuristic(state, problem, search_area=math.sqrt(food_grid.width * food_grid.height)) + 0*near_far_heuristic(state, problem) + 2*greedy_heuristic(state, problem)
 
             if(len(food_grid.as_list()) > 0.80 * problem.precomputed['maxFood']):
                 # print(len(food_grid.as_list()))
-                return euclidian_dist_each_pellet_heuristic(state, problem, search_area=math.sqrt(food_grid.width * food_grid.height))
+                return euclidian_dist_each_pellet_bounded_heuristic(state, problem, search_area=math.sqrt(food_grid.width * food_grid.height))
             local_food = food_around_player(position, food_grid)
             
             if(local_food == 2):
