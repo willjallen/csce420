@@ -71,7 +71,7 @@ def null_heuristic(state, problem=None):
     return 0
 
 # https://en.wikipedia.org/wiki/Taxicab_geometry
-def manhattan_dist_complex_heuristic(state, problem, args):
+def manhattan_dist_complex_heuristic(state, problem):
         # the state includes a grid of where the food is (problem isn't ter)
         position, food_grid = state
         pacman_x, pacman_y = position
@@ -100,7 +100,80 @@ def manhattan_dist_complex_heuristic(state, problem, args):
             dist_between_second_furthest_and_player = manhattan_dist(second_furthest_fruit, position) 
             return dist_between_furthest_fruits + dist_between_second_furthest_and_player
 
-def euclidian_dist_each_pellet_heuristic(state, problem, args):
+def euclidian_dist_closest_pellet_heuristic(state, problem):
+    # Find the distance between each pellet of food
+    position, food_grid = state
+    pacman_x, pacman_y = position
+
+    food_dist = 0
+    tiles = food_grid.as_list()
+    # print(tiles)
+    if len(tiles) == 0:
+        return 0
+    tiles.sort(key=lambda tile: problem.precomputed['eucDist'][(position, (tile[0],tile[1]))])
+    closest_fruit = tiles[0]
+
+
+    return problem.precomputed['eucDist'][(position, (closest_fruit[0],closest_fruit[1]))] * 1.001
+
+def near_far_heuristic(state, problem):
+    # Find the distance between each pellet of food
+    position, food_grid = state
+    pacman_x, pacman_y = position
+
+    food_dist = 0
+    tiles = food_grid.as_list()
+    # print(tiles)
+    if len(tiles) == 0:
+        return 0
+    tiles.sort(key=lambda tile: problem.precomputed['manDist'][(position, (tile[0],tile[1]))])
+
+
+    closest_fruit = tiles[0]
+    furthest_fruit = tiles[len(tiles)-1]
+
+    if closest_fruit == furthest_fruit:
+        return 0
+
+    return problem.precomputed['manDist'][(position, (closest_fruit[0],closest_fruit[1]))] + problem.precomputed['manDist'][((closest_fruit[0],closest_fruit[1]), (furthest_fruit[0],furthest_fruit[1]))] 
+
+
+def euclidian_dist_complex_furthest_pellet_heuristic(state, problem):
+    # Find the distance between each pellet of food
+    position, food_grid = state
+    pacman_x, pacman_y = position
+
+    food_dist = 0
+    tiles = food_grid.as_list()
+    # print(tiles)
+    if len(tiles) == 0:
+        return 0
+    tiles.sort(key=lambda tile: problem.precomputed['manDist'][(position, (tile[0],tile[1]))])
+    # print(tiles)
+    # print(food_dist)
+
+    # Find farthest and second farthest
+    furthest_fruit = None
+    second_furthest_fruit = None
+    for i in range(len(tiles)-1, 0):
+        if(tiles[i]):
+            if not furthest_fruit:
+                furthest_fruit = tiles[i]
+            elif not second_furthest_fruit:
+                second_furthest_fruit = tiles[i]
+            else:
+                break
+    if furthest_fruit and second_furthest_fruit:
+        dist_furthest_fruits = problem.precomputed['manDist'][((furthest_fruit[0],furthest_fruit[1]), (second_furthest_fruit[0],second_furthest_fruit[1]))]
+        pacman_dist_second_furthest = problem.precomputed['manDist'][(position, (furthest_fruit[0],furthest_fruit[1]))] 
+        h = dist_furthest_fruits + pacman_dist_second_furthest 
+    elif furthest_fruit:
+        h = problem.precomputed['manDist'][(position, (furthest_fruit[0],furthest_fruit[1]))]
+    else:
+        h = 0
+    return h 
+
+def euclidian_dist_each_pellet_heuristic(state, problem):
     # Find the distance between each pellet of food
     position, food_grid = state
     pacman_x, pacman_y = position
@@ -110,66 +183,25 @@ def euclidian_dist_each_pellet_heuristic(state, problem, args):
     for x in range(0, food_grid.width):
         for y in range(0, food_grid.height):
             if(food_grid[x][y]):
-                food_dist += args['eucDist'][(position, (x,y))]
+                food_dist += problem.precomputed['eucDist'][(position, (x,y))]
     # print(food_dist)
     return food_dist * (1.001)
 
-def greedy_heuristic(state, problem, args):
+def greedy_heuristic(state, problem):
     position, food_grid = state
     pacman_x, pacman_y = position
 
-    # if(food_grid[pacman_x][pacman_y]): return 1
-    return len(food_grid.as_list())
+    tiles = food_grid.as_list()
+    if len(tiles) == 0:
+        return 0
 
+    tiles.sort(key=lambda tile: abs(tile[0]-pacman_x) + abs(tile[1]-pacman_y))
+    # tiles.reverse()
+    # print(len(tiles))
+    closest_fruit = tiles[0]
+    closest_fruit_dist = manhattan_dist(position, closest_fruit) 
 
-def food_density_heuristic(state, problem, args):
-        # Heuristic : Density of food in the 4x4 directional region around the player,
-        # extended until it hits a wall. 
-        # Normalize?
-        #
-        foodDensity = 0
-        position, food_grid = state
-        pacman_x, pacman_y = position
-        # Up
-        pacman_search_y = pacman_y
-        while(pacman_search_y < food_grid.height):
-            if(food_grid[pacman_x][pacman_search_y]):
-                foodDensity += 1
-            else:
-                break
-            pacman_search_y += 1
-               
-
-        # Down 
-        pacman_search_y = pacman_y
-        while(pacman_search_y >= 0):
-            if(food_grid[pacman_x][pacman_search_y]):
-                foodDensity += 1
-            else:
-                break
-            pacman_search_y -= 1
-               
-
-        # Right
-        pacman_search_x = pacman_x
-        while(pacman_search_x < food_grid.width):
-            if(food_grid[pacman_search_x][pacman_y]):
-                foodDensity += 1
-            else:
-                break
-            pacman_search_x += 1
-               
-        # Left 
-        pacman_search_x = pacman_y
-        while(pacman_search_x >= 0):
-            if(food_grid[pacman_search_x][pacman_y]):
-                foodDensity += 1
-            else:
-                break
-            pacman_search_x -= 1
-
-        # print(foodDensity)
-        return foodDensity
+    return closest_fruit_dist
 
 
 def waypoint_heuristic(state, problem):
@@ -180,47 +212,34 @@ def graph_search_heurisitc():
 
 
 
-def heuristic(state, problem=None, args=None):
+def heuristic(state, problem=None):
     from search_agents import FoodSearchProblem
     
     # 
     # heuristic for the find-the-goal problem
     # 
     if isinstance(problem, SearchProblem):
-        # print(problem.heuristic)
         return 0
-        if(problem.is_goal_state(state)): return 0;
-        # print(problem)
-        # return 0
-        # print(problem)
-        # data
-        # print(problem.successors['A'])
-        costs = []
-        for transition in problem.successors[state]:
-                # if its a goal state, make it 0
-                if(problem.is_goal_state(transition[0])):
-                    return 0 
-                else:
-                    costs.append(transition[2])
-        
-        if(not costs): return 0
-
-        return sum(costs)
-        
 
     # traveling-salesman problem (collect multiple food pellets)
     # 
     # Note: The actual end "goal" of food search is all pieces of food have been eaten
     # it is not that the closest food has been consumed
     elif isinstance(problem, FoodSearchProblem):
-        if(args['heuristic'] == 'manhattan_dist_complex_heuristic'):
-            return manhattan_dist_complex_heuristic(state, problem, args)
-        elif(args['heuristic'] == 'euclidian_dist_each_pellet_heuristic'):
-            return euclidian_dist_each_pellet_heuristic(state, problem, args)
-        elif(args['heuristic'] == 'greedy_heuristic'):
-            return greedy_heuristic(state, problem, args) + euclidian_dist_each_pellet_heuristic(state, problem, args)
-    else:
-        return 0 
+        if(problem.precomputed['heuristic'] == 'manhattan_dist_complex_heuristic'):
+            return manhattan_dist_complex_heuristic(state, problem)
+        elif(problem.precomputed['heuristic'] == 'euclidian_dist_each_pellet_heuristic'):
+            return 10*euclidian_dist_each_pellet_heuristic(state, problem) + 4*near_far_heuristic(state, problem) + 2*greedy_heuristic(state, problem)
+        elif(problem.precomputed['heuristic'] == 'greedy_heuristic'):
+            return greedy_heuristic(state, problem)
+        elif(problem.precomputed['heuristic'] == 'euclidian_dist_closest_pellet_heuristic'):
+            return euclidian_dist_closest_pellet_heuristic(state, problem)
+        elif(problem.precomputed['heuristic'] == 'euclidian_dist_complex_furthest_pellet_heuristic'):
+            return euclidian_dist_complex_furthest_pellet_heuristic(state, problem)
+        elif(problem.precomputed['heuristic'] == 'near_far_heuristic'):
+            return near_far_heuristic(state, problem)
+        else:
+            return 0 
 
 class Node():
     def __init__(self, parent, state, action, g, h):
@@ -260,48 +279,18 @@ class Node():
         return self._compare(other, lambda s, o: s != o)
 
 
-'''
-    == Aliens are real and we just chernobyl'd ohio? ==
-    Here's the skinny: NESTED A*
-    There's no fuckin way to brute force this with lots of food.
-    The problem is that we are trying to search a graph with many nodes,
-    when really we should be finding a graph with few nodes.
 
-    So, we will split the maze into chunks with 2 points for entry/exit.
-    Each chunk point will coincide with another chunk point
-
-    The chunks will be distributed(deterministically) uniformly such that each point
-    is roughly equidistant from another.
-
-
-    For each chunk we run A* to find optimal path that collects all food in that chunk.
-    
-    call this path chunk_i_path
-
-    Now, if we look at our new maze it has much fewer "pellets"
-    If we have a hallway like
-    ->  * * * * * * * where * is a food pellet
-    then this becomes chunk entry and exit node like
-    ->  X X where X is an entry/exit node
-
-    When pacman enters a chunk(i) node, pacman will execute chunk_i_path 
-     
-
-    First, we uniformly disperse n entry/exit points
-'''
 class AStar():
     def __init__(self, problem, heuristic):
-        print(heuristic)
         self.problem = problem
         self.heuristic = heuristic
-        self.precomputed = {}
+        self.problem.precomputed = {}
 
     # Returns solution node, or -1 (failure)
-    def search(self, args=None):
+    def search(self):
         ## Set up A* search
         start_state = self.problem.get_start_state()
-        # print(len(start_state[1].as_list()))
-        # exit()
+
         rootNode = Node(parent=None, state=start_state, action=None, g=0, h=self.heuristic(start_state, self.problem))
         frontier = [] # Heap queue (Priority queue)
         heappush(frontier, rootNode)
@@ -309,39 +298,32 @@ class AStar():
         
         while len(frontier) > 0:
             node = heappop(frontier)
-            # print(node.path_cost, len(node.state[1].as_list()), len(frontier))
-
             if(self.problem.is_goal_state(node.state)): return node
-            # if(len(node.state[1].as_list()) < 1): return node
 
             for child in self.problem.get_successors(node.state):
-                # print(child)
+
                 cs = child.state
                 h = self.heuristic(cs, self.problem)
                 childNode = Node(parent=node, state=cs, action=child.action, g=node.g+child.cost, h=h)
                 if cs not in reached or childNode.f < reached[cs].f:
                     reached[cs] = childNode
                     heappush(frontier, childNode)
-                    # if childNode not in frontier:
-                    #     heappush(frontier, childNode)
+
         return -1
 
     # Constructs precomputed data based on heuristic and constructs solution array
     def execute(self):
         
-        # heuristic = 'euclidian_dist_each_pellet_heuristic'
+        # self.problem.precomputed['heuristic'] = 'euclidian_dist_each_pellet_heuristic'
         # heuristic = 'greedy_heuristic'
-
+        # euclidian_dist_closest_pellet_heuristic
         from search_agents import FoodSearchProblem
-        args = {}
+
         if isinstance(self.problem, FoodSearchProblem):
-            args['heuristic'] = 'greedy_heuristic'
+            self.problem.precomputed['heuristic'] = 'euclidian_dist_each_pellet_heuristic'
 
-            # Compute the euclidian distance 
-            if(args['heuristic'] == 'euclidian_dist_each_pellet_heuristic'): pass
-            # Compute the euclidian ditance between each point, (len*width)^2 items
-            args['eucDist'] = {} # Query with (point1, point2)
-
+            self.problem.precomputed['eucDist'] = {} # Query with (point1, point2)
+            self.problem.precomputed['manDist'] = {}
             position, food_grid = self.problem.get_start_state()
             tempArr = []
             for x in range(0, food_grid.width):
@@ -351,15 +333,13 @@ class AStar():
             for coordOne in tempArr:
                 for coordTwo in tempArr:
                     if(coordOne != coordTwo):
-                        args['eucDist'][(coordOne, coordTwo)] = euclidean_dist(coordOne, coordTwo)
+                        self.problem.precomputed['eucDist'][(coordOne, coordTwo)] = euclidean_dist(coordOne, coordTwo)
+                        self.problem.precomputed['manDist'][(coordOne, coordTwo)] = manhattan_dist(coordOne, coordTwo)
 
-                # print(args["eucDist"])
-            if(args['heuristic'] == 'manhattan_dist_complex_heuristic'):
-                pass
 
 
         
-        solutionNode = self.search(args=args)
+        solutionNode = self.search()
 
         if(solutionNode == -1):
             print('SOLUTION NOT FOUND. EXITING')
@@ -374,7 +354,6 @@ class AStar():
 
         path.reverse()
         return path
-
 
 def a_star_search(problem, heuristic=heuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
