@@ -229,7 +229,7 @@ def heuristic(state, problem=None):
         if(problem.precomputed['heuristic'] == 'manhattan_dist_complex_heuristic'):
             return manhattan_dist_complex_heuristic(state, problem)
         elif(problem.precomputed['heuristic'] == 'euclidian_dist_each_pellet_heuristic'):
-            return 10*euclidian_dist_each_pellet_heuristic(state, problem) + 4*near_far_heuristic(state, problem) + 2*greedy_heuristic(state, problem)
+            return 34*euclidian_dist_each_pellet_heuristic(state, problem) + 0*near_far_heuristic(state, problem) + 1*greedy_heuristic(state, problem)
         elif(problem.precomputed['heuristic'] == 'greedy_heuristic'):
             return greedy_heuristic(state, problem)
         elif(problem.precomputed['heuristic'] == 'euclidian_dist_closest_pellet_heuristic'):
