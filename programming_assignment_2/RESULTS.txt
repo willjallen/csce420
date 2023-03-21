@@ -1,0 +1,99 @@
+summary of nodes searched WITHOUT alpha-beta pruning for game1:
+number of nodes searched: 549945
+number of nodes searched: 59704
+number of nodes searched: 7331
+number of nodes searched: 934
+number of nodes searched: 197
+number of nodes searched: 46
+number of nodes searched: 13
+number of nodes searched: 4
+number of nodes searched: 1
+
+summary of nodes searched WITH alpha-beta pruning for game1:
+number of nodes searched: 34202
+number of nodes searched: 6304
+number of nodes searched: 1630
+number of nodes searched: 220
+number of nodes searched: 97
+number of nodes searched: 32
+number of nodes searched: 13
+number of nodes searched: 4
+number of nodes searched: 1
+
+
+summary of nodes searched WITHOUT alpha-beta pruning for game2:
+number of nodes searched: 55504
+number of nodes searched: 6811
+number of nodes searched: 1054
+number of nodes searched: 257
+number of nodes searched: 50
+number of nodes searched: 15
+number of nodes searched: 4
+number of nodes searched: 1
+
+summary of nodes searched WITH alpha-beta pruning for game2:
+number of nodes searched: 8465
+number of nodes searched: 1431
+number of nodes searched: 375
+number of nodes searched: 159
+number of nodes searched: 38
+number of nodes searched: 15
+number of nodes searched: 4
+number of nodes searched: 1
+
+
+summary of nodes searched WITHOUT alpha-beta pruning for game3:
+number of nodes searched: 59704
+number of nodes searched: 7331
+number of nodes searched: 934
+number of nodes searched: 197
+number of nodes searched: 46
+number of nodes searched: 13
+number of nodes searched: 4
+number of nodes searched: 1
+
+summary of nodes searched WITH alpha-beta pruning for game3:
+number of nodes searched: 6304
+number of nodes searched: 1630
+number of nodes searched: 220
+number of nodes searched: 97
+number of nodes searched: 32
+number of nodes searched: 13
+number of nodes searched: 4
+number of nodes searched: 1
+
+
+summary of nodes searched WITHOUT alpha-beta pruning for game4:
+number of nodes searched: 63904
+number of nodes searched: 8751
+number of nodes searched: 1464
+number of nodes searched: 229
+number of nodes searched: 60
+number of nodes searched: 13
+number of nodes searched: 4
+number of nodes searched: 1
+
+summary of nodes searched WITH alpha-beta pruning for game4:
+number of nodes searched: 7210
+number of nodes searched: 2771
+number of nodes searched: 631
+number of nodes searched: 166
+number of nodes searched: 52
+number of nodes searched: 13
+number of nodes searched: 4
+number of nodes searched: 1
+
+
+summary of nodes searched WITHOUT alpha-beta pruning for game5:
+number of nodes searched: 7063
+number of nodes searched: 1060
+number of nodes searched: 237
+number of nodes searched: 36
+number of nodes searched: 6
+
+summary of nodes searched WITH alpha-beta pruning for game5:
+number of nodes searched: 1490
+number of nodes searched: 409
+number of nodes searched: 147
+number of nodes searched: 30
+number of nodes searched: 6

@@ -1,0 +1,194 @@
+Game 2: Start with an X in the middle; then let computer choose all subsequent moves.
+
+Welcome to jungle >:)
+Pruning: False, Verbose output: True
+Type 'commands' to see commands     
+show
+. . .
+. . .
+. . .
+
+move X B 2
+. . .
+. X .
+. . .
+
+choose O
+move (A, 1) mm_score: 0
+move (A, 2) mm_score: 0.5
+move (A, 3) mm_score: 0
+move (B, 1) mm_score: 0.5
+move (B, 3) mm_score: 0.5
+move (C, 1) mm_score: 0
+move (C, 2) mm_score: 0.5
+move (C, 3) mm_score: 0        
+number of nodes searched: 55504
+O . .
+. X .
+. . .
+
+choose X
+move (A, 2) mm_score: 0
+move (A, 3) mm_score: 0
+move (B, 1) mm_score: 0
+move (B, 3) mm_score: 0
+move (C, 1) mm_score: 0
+move (C, 2) mm_score: 0
+move (C, 3) mm_score: 0       
+number of nodes searched: 6811
+O X .
+. X .
+. . .
+
+choose O
+move (A, 3) mm_score: 0.9     
+move (B, 1) mm_score: 0.9     
+move (B, 3) mm_score: 0.9     
+move (C, 1) mm_score: 0.9     
+move (C, 2) mm_score: 0       
+move (C, 3) mm_score: 0.9     
+number of nodes searched: 1054
+O X .
+. X .
+. O .
+
+choose X
+move (A, 3) mm_score: -0.7   
+move (B, 1) mm_score: 0      
+move (B, 3) mm_score: 0      
+move (C, 1) mm_score: 0      
+move (C, 3) mm_score: 0      
+number of nodes searched: 257
+O X .
+X X .
+. O .
+
+choose O
+move (A, 3) mm_score: 0.9
+move (B, 3) mm_score: 0  
+move (C, 1) mm_score: 0.9
+move (C, 3) mm_score: 0.9
+number of nodes searched: 50
+O X .
+X X O
+. O .
+
+choose X
+move (A, 3) mm_score: 0
+move (C, 1) mm_score: 0
+move (C, 3) mm_score: 0
+number of nodes searched: 15
+O X X
+X X O
+. O .
+
+choose O
+move (C, 1) mm_score: 0
+move (C, 3) mm_score: 0.9
+number of nodes searched: 4
+O X X
+X X O
+O O .
+
+choose X
+move (C, 3) mm_score: 0
+number of nodes searched: 1
+O X X
+X X O
+O O X
+
+reset
+pruning on
+show
+. . .
+. . .
+. . .
+
+move X B 2
+. . .
+. X .
+. . .
+
+choose O
+move (A, 1) mm_score: 0
+move (A, 2) mm_score: 0.5
+move (A, 3) mm_score: 0
+move (B, 1) mm_score: 0.5
+move (B, 3) mm_score: 0.5
+move (C, 1) mm_score: 0
+move (C, 2) mm_score: 0.5
+move (C, 3) mm_score: 0
+number of nodes searched: 8465
+O . .
+. X .
+. . .
+
+choose X
+move (A, 2) mm_score: 0
+move (A, 3) mm_score: 0
+move (B, 1) mm_score: 0
+move (B, 3) mm_score: 0
+move (C, 1) mm_score: 0
+move (C, 2) mm_score: 0
+move (C, 3) mm_score: 0
+number of nodes searched: 1431
+O X .
+. X .
+. . .
+
+choose O
+move (A, 3) mm_score: 0.9
+move (B, 1) mm_score: 0.9
+move (B, 3) mm_score: 0.9
+move (C, 1) mm_score: 0.9
+move (C, 2) mm_score: 0
+move (C, 3) mm_score: 0.9
+number of nodes searched: 375
+O X .
+. X .
+. O .
+
+choose X
+move (A, 3) mm_score: -0.7
+move (B, 1) mm_score: 0
+move (B, 3) mm_score: 0
+move (C, 1) mm_score: 0
+move (C, 3) mm_score: 0
+number of nodes searched: 159
+O X .
+X X .
+. O .
+
+choose O
+move (A, 3) mm_score: 0.9
+move (B, 3) mm_score: 0
+move (C, 1) mm_score: 0.9
+move (C, 3) mm_score: 0.9
+number of nodes searched: 38
+O X .
+X X O
+. O .
+
+choose X
+move (A, 3) mm_score: 0
+move (C, 1) mm_score: 0
+move (C, 3) mm_score: 0
+number of nodes searched: 15
+O X X
+X X O
+. O .
+
+choose O
+move (C, 1) mm_score: 0
+move (C, 3) mm_score: 0.9
+number of nodes searched: 4
+O X X
+X X O
+O O .
+
+choose X
+move (C, 3) mm_score: 0
+number of nodes searched: 1
+O X X
+X X O
+O O X
