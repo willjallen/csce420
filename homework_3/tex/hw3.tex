@@ -1,0 +1,347 @@
+
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm,latexsym,paralist,relsize}
+\usepackage{graphicx}
+\usepackage[margin=1.5in]{geometry}
+\usepackage{titling}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\setlength{\droptitle}{-10em}   % This is your set screw
+\DeclareRobustCommand{\stirling}{\genfrac\{\}{0pt}{}}
+\theoremstyle{definition}
+
+%\newtheorem{definition}{Definition}
+%\newtheorem{proof}{Proof}
+%\newtheorem{remark}{Remark}
+
+
+\newtheorem{problem}{Problem}
+\newtheorem*{solution}{Solution}
+\newtheorem*{resources}{Resources}
+
+
+% Self Explanatory
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\newtheorem{example}{Example}
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\newcommand{\ep}{\varepsilon}
+\newcommand{\vp}{\varphi}
+\newcommand{\lam}{\lambda}
+\newcommand{\Lam}{\Lambda}
+%\newcommand{\abs}[1]{\ensuremath{\left\lvert#1\right\rvert}} % This clashes with the physics package
+%\newcommand{\norm}[1]{\ensuremath{\left\lVert#1\right\rVert}} % This clashes with the physics package
+
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil#1\right\rceil}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\As}{\mathcal{A}}
+\newcommand{\Bs}{\mathcal{B}}
+\newcommand{\Cs}{\mathcal{C}}
+\newcommand{\Ds}{\mathcal{D}}
+\newcommand{\Es}{\mathcal{E}}
+\newcommand{\Fs}{\mathcal{F}}
+\newcommand{\Gs}{\mathcal{G}}
+\newcommand{\Hs}{\mathcal{H}}
+\newcommand{\Is}{\mathcal{I}}
+\newcommand{\Js}{\mathcal{J}}
+\newcommand{\Ks}{\mathcal{K}}
+\newcommand{\Ls}{\mathcal{L}}
+\newcommand{\Ms}{\mathcal{M}}
+\newcommand{\Ns}{\mathcal{N}}
+\newcommand{\Os}{\mathcal{O}}
+\newcommand{\Ps}{\mathcal{P}}
+\newcommand{\Qs}{\mathcal{Q}}
+\newcommand{\Rs}{\mathcal{R}}
+\newcommand{\Ss}{\mathcal{S}}
+\newcommand{\Ts}{\mathcal{T}}
+\newcommand{\Us}{\mathcal{U}}
+\newcommand{\Vs}{\mathcal{V}}
+\newcommand{\Ws}{\mathcal{W}}
+\newcommand{\Xs}{\mathcal{X}}
+\newcommand{\Ys}{\mathcal{Y}}
+\newcommand{\Zs}{\mathcal{Z}}
+\newcommand{\ab}{\textbf{a}}
+\newcommand{\bb}{\textbf{b}}
+\newcommand{\cb}{\textbf{c}}
+\newcommand{\db}{\textbf{d}}
+\newcommand{\ub}{\textbf{u}}
+%\renewcommand{\vb}{\textbf{v}} % This clashes with the physics package (the physics package already defines the \vb command)
+\newcommand{\wb}{\textbf{w}}
+\newcommand{\xb}{\textbf{x}}
+\newcommand{\yb}{\textbf{y}}
+\newcommand{\zb}{\textbf{z}}
+\newcommand{\Ab}{\textbf{A}}
+\newcommand{\Bb}{\textbf{B}}
+\newcommand{\Cb}{\textbf{C}}
+\newcommand{\Db}{\textbf{D}}
+\newcommand{\eb}{\textbf{e}}
+\newcommand{\ex}{\textbf{e}_x}
+\newcommand{\ey}{\textbf{e}_y}
+\newcommand{\ez}{\textbf{e}_z}
+\newcommand{\abar}{\overline{a}}
+\newcommand{\bbar}{\overline{b}}
+\newcommand{\cbar}{\overline{c}}
+\newcommand{\dbar}{\overline{d}}
+\newcommand{\ubar}{\overline{u}}
+\newcommand{\vbar}{\overline{v}}
+\newcommand{\wbar}{\overline{w}}
+\newcommand{\xbar}{\overline{x}}
+\newcommand{\ybar}{\overline{y}}
+\newcommand{\zbar}{\overline{z}}
+\newcommand{\Abar}{\overline{A}}
+\newcommand{\Bbar}{\overline{B}}
+\newcommand{\Cbar}{\overline{C}}
+\newcommand{\Dbar}{\overline{D}}
+\newcommand{\Ubar}{\overline{U}}
+\newcommand{\Vbar}{\overline{V}}
+\newcommand{\Wbar}{\overline{W}}
+\newcommand{\Xbar}{\overline{X}}
+% \newcommand{\ybar}{\overline{y}}
+\newcommand{\Zbar}{\overline{Z}}
+\newcommand{\Aint}{A^\circ}
+\newcommand{\Bint}{B^\circ}
+\newcommand{\limk}{\lim_{k\to\infty}}
+\newcommand{\limm}{\lim_{m\to\infty}}
+\newcommand{\limn}{\lim_{n\to\infty}}
+\newcommand{\limx}[1][a]{\lim_{x\to#1}}
+\newcommand{\liminfm}{\liminf_{m\to\infty}}
+\newcommand{\limsupm}{\limsup_{m\to\infty}}
+\newcommand{\liminfn}{\liminf_{n\to\infty}}
+\newcommand{\limsupn}{\limsup_{n\to\infty}}
+\newcommand{\sumkn}{\sum_{k=1}^n}
+\newcommand{\sumin}{\sum_{i=1}^n}
+\newcommand{\sumk}[1][1]{\sum_{k=#1}^\infty}
+\newcommand{\summ}[1][1]{\sum_{m=#1}^\infty}
+\newcommand{\sumn}[1][1]{\sum_{n=#1}^\infty}
+\newcommand{\emp}{\varnothing}
+\newcommand{\exc}{\backslash}
+\newcommand{\sub}{\subseteq}
+\newcommand{\sups}{\supseteq}
+\newcommand{\capp}{\bigcap}
+\newcommand{\cupp}{\bigcup}
+\newcommand{\kupp}{\bigsqcup}
+\newcommand{\cappkn}{\bigcap_{k=1}^n}
+\newcommand{\cuppkn}{\bigcup_{k=1}^n}
+\newcommand{\kuppkn}{\bigsqcup_{k=1}^n}
+\newcommand{\cappk}[1][1]{\bigcap_{k=#1}^\infty}
+\newcommand{\cuppk}[1][1]{\bigcup_{k=#1}^\infty}
+\newcommand{\cappm}[1][1]{\bigcap_{m=#1}^\infty}
+\newcommand{\cuppm}[1][1]{\bigcup_{m=#1}^\infty}
+\newcommand{\cappn}[1][1]{\bigcap_{n=#1}^\infty}
+\newcommand{\cuppn}[1][1]{\bigcup_{n=#1}^\infty}
+\newcommand{\kuppk}[1][1]{\bigsqcup_{k=#1}^\infty}
+\newcommand{\kuppm}[1][1]{\bigsqcup_{m=#1}^\infty}
+\newcommand{\kuppn}[1][1]{\bigsqcup_{n=#1}^\infty}
+\newcommand{\cappa}{\bigcap_{\alpha\in I}}
+\newcommand{\cuppa}{\bigcup_{\alpha\in I}}
+\newcommand{\kuppa}{\bigsqcup_{\alpha\in I}}
+\newcommand{\Rx}{\overline{\mathbb{R}}}
+\newcommand{\dx}{\,dx}
+\newcommand{\dy}{\,dy}
+\newcommand{\dt}{\,dt}
+\newcommand{\dax}{\,d\alpha(x)}
+\newcommand{\dbx}{\,d\beta(x)}
+\DeclareMathOperator{\glb}{\text{glb}}
+\DeclareMathOperator{\lub}{\text{lub}}
+\newcommand{\xh}{\widehat{x}}
+\newcommand{\yh}{\widehat{y}}
+\newcommand{\zh}{\widehat{z}}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+\renewcommand{\iff}{\Leftrightarrow}
+\DeclareMathOperator{\im}{\text{im}}
+\let\spn\relax\let\Re\relax\let\Im\relax
+\DeclareMathOperator{\spn}{\text{span}}
+\DeclareMathOperator{\Re}{\text{Re}}
+\DeclareMathOperator{\Im}{\text{Im}}
+\DeclareMathOperator{\diag}{\text{diag}}
+
+\newcommand{\RN}[1]{%
+  \textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\newcommand{\bhat}{\hat{\beta_1}}
+
+% Typed name, course, email address
+\title{CSCE 420 : HW 3}
+\author{William Allen}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\textbf{I did the last homework in Word and had a mental breakdown as a consequence. I'm doing this in latex this time just as God intended.}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  %% MAJOR PROBLEM  
+  \item Translate the following sentences into First-Order Logic. Remember to break things down to simple concepts (with short predicate and function names), and make use of quantifiers. For example, “tasteDelicious(someRedTomatos)”, is not broken down enough; instead we would be looking for a formulation such as: 
+
+    “$\exists x$ tomato(x)$\land$red(x)$\land$taste(x,delicious)”. 
+
+    See the lecture slides for more examples and guidance.
+    \begin{enumerate}
+      \item bowling balls are sporting equipment
+      \item all domesticated horses have an owner
+      \item the rider of a horse can be different than the owner
+      \item horses move faster than frogs
+      \item a finger is any digit on a hand other than the thumb
+      \item an isosceles triangle is defined as a polygon with 3 edges, which are connected at 3 vertices, where 2 (but not 3) edges have the same length 
+    \end{enumerate}
+    
+    %% SOLUTION
+    \vspace{1em} 
+    \textit{ Sol. }
+    \vspace{1em}
+    \begin{quote}
+      \begin{enumerate}
+        \item $\forall x\;\text{ball}(x) \land \text{heavy}(x) \land \text{hasThreeHoles}(x) \rightarrow \text{sportingEquipment}(x)$
+        \item $\forall x\;\text{horse}(x) \land \text{domesticated}(x) \rightarrow \exists y\;\text{ownerOf}(x,y)$
+        \item $\forall x\;\text{horse}(x) \land \exists y\;\text{riderOf}(x,y) \land \exists z\;\text{ownerOf}(x,z) \rightarrow y \neq z$
+        \item $\forall x\;\text{horse}(x) \land \forall y\;\text{frog}(y) \rightarrow \text{movesFaster}(x,y)$
+        \item $\forall x\;\text{digit}(x) \land \text{onHand}(x) \land \text{notThumb}(x) \rightarrow \text{finger}(x)$
+        \item $\forall x\;\text{isoscelesTriangle}(x) \iff \text{polygon}(x) \land \text{hasEdges}(x,3) \land \text{hasVertices}(x,3) \land \exists a,b,c\;\text{lengthOf}(a,b,x) \land \text{lengthOf}(b,c,x) \land \text{lengthOf}(a,c,x) \land (\text{equals}(a,b) \lor \text{equals}(b,c) \lor \text{equals}(a,c)) \land \neg(\text{equals}(a,b) \land \text{equals}(b,c) \land \text{equals}(a,c))$
+     \end{enumerate} 
+    \end{quote}
+
+    \newpage
+  
+  %% MAJOR PROBLEM
+  \item Convert the following first-order logic sentence into CNF:
+  \begin{equation*}
+    \forall x\;\text{person}(x) \land [\exists z \;\text{petOf}(x,z) \land \forall y \; \text{petOf}(x,y) \rightarrow \text{dog}(y)] \rightarrow \text{doglover}(x)
+  \end{equation*}
+  %% SOLUTION
+  \vspace{1em} 
+  \textit{ Sol. }
+  \begin{quote}
+    Remove implications
+    \begin{equation*}
+    \forall x\; [\lnot \text{person}(x) \lor (\lnot \exists z \;\text{petOf}(x,z) \lor \lnot \forall y \; \text{petOf}(x,y) \lor \text{dog}(y)) \lor \text{doglover}(x)]
+    \end{equation*}
+
+    Move $\lnot$ inwards:
+    \begin{equation*}
+    \forall x\; [\lnot \text{person}(x) \lor ( \forall z \;\lnot\text{petOf}(x,z) \lor  \exists y \; \lnot\text{petOf}(x,y) \lor \text{dog}(y)) \lor \text{doglover}(x)]
+    \end{equation*}
+
+    Skolemization (removing existential quantifiers):
+    \begin{equation*}
+      \forall x\; [\lnot \text{person}(x) \lor (\forall z \;\lnot \text{petOf}(x, z) \lor \lnot\text{petOf}(x, g(x)) \lor \text{dog}(g(x))) \lor \text{doglover}(x)]
+    \end{equation*}
+
+    Drop universal quantifiers:
+    \begin{equation*}
+      \lnot \text{person}(x) \lor (\lnot \text{petOf}(x, z) \lor \lnot\text{petOf}(x, g(x)) \lor \text{dog}(g(x))) \lor \text{doglover}(x)
+    \end{equation*}
+
+    No distribution required, we are done.
+
+  \end{quote}
+  
+  \newpage
+
+  \item Determine whether or not the following pairs of predicates are unifiable. If they are, give the
+  most-general unifier and show the result of applying the substitution to each predicate. If they are
+  not unifiable, indicate why. Capital letters represent variables; constants and function names are
+  lowercase. For example, ‘loves(A,hay)’ and ‘loves(horse,hay)’ are unifiable, the unifier is
+  u={A/horse}, and the unified expression is ‘loves(horse,hay)’ for both.
+  \begin{enumerate}
+    \item owes(owner(X), citibank, cost(X)), owes(owner(ferrari), Z, cost(Y))
+    \item gives(bill, jerry, book21), gives(X, brother(X),Z)
+    \item opened(X, result(open(X),s0))), opened(toolbox, Z)
+  \end{enumerate}
+
+  %% SOLUTION
+  \vspace{1em} 
+  \textit{ Sol. }
+  \begin{quote}
+  \begin{enumerate}
+    \item The most general unifier is \{X/ferrari, Z/citibank, Y/cost(ferrari)\}. After applying the substitution, the predicates become:\newline
+      owes(owner(ferrari), citibank, cost(ferrari))
+    \item The predicates are not unifiable. The second predicate states that X gives something to brother(X). This implies that brother(X) refers to X's sibling, and therefore, X cannot simultaneously refer to bill and jerry. Hence, the predicates cannot be unified.
+    \item The most general unifier is \{X/toolbox, Z/result(open(toolbox),s0)\}. After applying the substitution, the predicates become:\newline
+      opened(toolbox, result(open(toolbox),s0))
+  \end{enumerate}
+  \end{quote}
+  \newpage
+
+  \item Consider the following situation:\newline
+
+  \textit{
+    Marcus is a Pompeian.\\
+    All Pompeians are Romans.\\
+    Ceasar is a ruler.\\
+    All Romans are either loyal to Caesar or hate Caesar (but not both).\\
+    Everyone is loyal to someone.\\
+    People only try to assassinate rulers they are not loyal to.\\
+    Marcus tries to assassinate Caesar.\\
+  }
+  \begin{enumerate}
+    \item Translate these sentences to First-Order Logic.
+    \item Prove that Marcus hates Caesar using Natural Deduction. In the same style as the examples in the lecture slides, label all derived sentences with the ROI used, which prior sentences were used, and what unifier was used.
+    \item Convert all the sentences to CNF
+    \item Prove that Marcus hates Ceasar using Resolution Refutation
+  \end{enumerate}
+  
+  %% SOLUTION
+  \vspace{1em} 
+  \textit{ Sol. }
+  \begin{quote}
+  \begin{enumerate}
+    \item 
+
+      \begin{enumerate}
+        \item $\forall x(\text{Pompeian}(x) \rightarrow \text{Roman}(x))$
+        \item $\text{Ruler}(Ceasar)$
+        \item $\forall x(\text{Roman}(x) \rightarrow ((\text{Loyal}(x,Ceasar) \land \neg \text{Hate}(x,Ceasar)) \lor(\text{Hate}(x,Ceasar) \land \neg \text{Loyal}(x,Ceasar))))$
+        \item $\forall x \exists y(\text{Loyal}(x,y))$
+        \item $\forall x \forall y((\text{Ruler}(y) \land \neg \text{Loyal}(x,y)) \rightarrow \text{Assassinate}(x,y))$
+        \item $\text{Pompeian}(Marcus)$
+        \item $\text{Assassinate}(Marcus,Ceasar)$
+      \end{enumerate}
+      \vspace{0.5em}
+    \item
+
+      \begin{enumerate}[label=\arabic*.]
+        \item $\forall x(\text{Pompeian}(x) \rightarrow \text{Roman}(x))$ (Premise)
+        \item $\text{Ruler}(Ceasar)$ (Premise)
+        \item $\forall x(\text{Roman}(x) \rightarrow ((\text{Loyal}(x,Ceasar) \land \neg \text{Hate}(x,Ceasar)) \lor(\text{Hate}(x,Ceasar) \land \neg \text{Loyal}(x,Ceasar))))$ (Premise)
+        \item $\forall x \exists y(\text{Loyal}(x,y))$ (Premise)
+        \item $\exists y(\text{Loyal}(Marcus,y))$ (Universal instantiation of 4)
+        \item $\text{Roman}(Marcus)$ (Modus Ponens of 1 and 5 using substitution $x/Marcus$)
+        \item $\text{Loyal}(Marcus,Ceasar) \lor (\text{Hate}(Marcus,Ceasar) \land \neg \text{Loyal}(Marcus,Ceasar))$ (Modus Ponens of 3 and 6 using substitution $x/Marcus$)
+        \item $\neg \text{Hate}(Marcus,Ceasar)$ (Modus Tollens of 2 and 7 using substitution $x/Marcus$)
+        \item $\text{Hate}(Marcus,Ceasar) \land \neg \text{Loyal}(Marcus,Ceasar)$ (Conjunction of 7 using substitution $x/Marcus$)
+        \item $\text{Hate}(Marcus,Ceasar)$ (Simplification of 9)
+    \end{enumerate}
+\end{enumerate}
+
+\end{quote}
+
+\end{enumerate}
+
+\end{document}
+
