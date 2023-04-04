@@ -329,14 +329,96 @@
         \item $\forall x(\text{Pompeian}(x) \rightarrow \text{Roman}(x))$ (Premise)
         \item $\text{Ruler}(Ceasar)$ (Premise)
         \item $\forall x(\text{Roman}(x) \rightarrow ((\text{Loyal}(x,Ceasar) \land \neg \text{Hate}(x,Ceasar)) \lor(\text{Hate}(x,Ceasar) \land \neg \text{Loyal}(x,Ceasar))))$ (Premise)
-        \item $\forall x \exists y(\text{Loyal}(x,y))$ (Premise)
-        \item $\exists y(\text{Loyal}(Marcus,y))$ (Universal instantiation of 4)
+        \item $\forall x \forall y((\text{Ruler}(y) \land \neg \text{Loyal}(x,y)) \rightarrow \text{Assassinate}(x,y))$ (Premise)
+        \item $\text{Pompeian}(Marcus)$ (Premise)
+        \item $\text{Assassinate}(Marcus,Ceasar)$ (Premise)
         \item $\text{Roman}(Marcus)$ (Modus Ponens of 1 and 5 using substitution $x/Marcus$)
-        \item $\text{Loyal}(Marcus,Ceasar) \lor (\text{Hate}(Marcus,Ceasar) \land \neg \text{Loyal}(Marcus,Ceasar))$ (Modus Ponens of 3 and 6 using substitution $x/Marcus$)
-        \item $\neg \text{Hate}(Marcus,Ceasar)$ (Modus Tollens of 2 and 7 using substitution $x/Marcus$)
-        \item $\text{Hate}(Marcus,Ceasar) \land \neg \text{Loyal}(Marcus,Ceasar)$ (Conjunction of 7 using substitution $x/Marcus$)
-        \item $\text{Hate}(Marcus,Ceasar)$ (Simplification of 9)
+        \item $(\text{Loyal}(Marcus,Ceasar) \land \neg \text{Hate}(Marcus,Ceasar)) \lor(\text{Hate}(Marcus,Ceasar) \land \neg \text{Loyal}(Marcus,Ceasar))$ (Modus Ponens of 3 and 7 using substitution $x/Marcus$)
+        \item $\neg \text{Loyal}(Marcus, Ceasar) \land \text{Ruler}(Ceasar)$ (Modus Tollens of 4 and 6 using substitution $x/Marcus$, $y/Ceasar$)
+        \item $\neg \text{Loyal}(Marcus, Ceasar)$ (Simplification of 9)
+        \item $\text{Hate}(Marcus,Ceasar) \land \neg \text{Loyal}(Marcus,Ceasar)$ (Disjunctive Syllogism of 8 and 10)
+        \item $\text{Hate}(Marcus,Ceasar)$ (Simplification of 11)
     \end{enumerate}
+
+  \item 
+    \begin{enumerate}
+    \item $\neg\text{Pompeian}(x) \lor \text{Roman}(x)$
+    \item $\text{Ruler}(Ceasar)$
+    \item $(\neg\text{Roman}(x) \land \neg\text{Roman}(x)) \lor (\neg\text{Roman}(x) \land \text{Loyal}(x,Ceasar)) \lor (\neg\text{Roman}(x) \land \text{Hate}(x,Ceasar)) \lor (\neg\text{Hate}(x,Ceasar) \land \text{Loyal}(x,Ceasar)) \lor (\neg\text{Hate}(x,Ceasar) \land \text{Hate}(x,Ceasar))$
+    \item $\text{Loyal}(x,f(x))$
+    \item $\neg\text{Ruler}(y) \lor \text{Loyal}(x,y) \lor \text{Assassinate}(x,y)$
+    \item $\text{Pompeian}(Marcus)$
+    \item $\text{Assassinate}(Marcus,Ceasar)$
+    \end{enumerate}
+\end{enumerate}
+
+\end{quote}
+\newpage
+\item Write a KB in First-Order Logic with rules/axioms for:
+  \begin{enumerate}
+    \item Map-coloring – every state must be exactly 1 color, and adjacent states must be different
+colors. Assume possible colors are states are defined using unary predicate like color(red)
+or state(WA). To say a state has a color, use a binary predicate, e.g. ‘color(WA,red)’.
+    \item Sammy’s Sport Shop – include sentences for specific facts like obs(1,W) or label(2,B),
+as well as for general constraints about the boxes and colors. Use binary predicate
+‘contains(x,q)’ to represent that box x contains tennis balls of color q (where q could be
+W, Y, or B).
+    \item Wumpus World - Write rules for which rooms are ‘stenchy’, ‘breezy’, and ‘safe’. (hint:
+define a helper concept called ‘adjacent(x,y,p,q)’ which defines when a room at
+coordinates (x,y) is adjacent to another room at (p,q), and x,y,p,q are integers 1-4.
+    \item 4-Queens – assume row(1)…row(4) and col(1)…col(4) are facts; write rules that
+describe configurations of 4 queens such that none can attack each other, using
+‘queen(r,c)’ to represent that there is a queen in row r and col c.
+  \end{enumerate}
+
+  %% SOLUTION
+  \vspace{1em} 
+  \textit{ Sol. }
+  \begin{quote}
+  \begin{enumerate}
+    \item 
+
+      \begin{enumerate}
+        \item adjacent(WA, NT) $\lor$ adjacent(WA, SA) $\lor$ adjacent(NT, Q) $\lor$ adjacent(SA, Q) $\lor$ adjacent(SA, NSW)  $\lor$ adjacent(SA, V) $\lor$ adjacent(Q, NSW) $\lor$ adjacent(V, NSW)
+        \item $\forall x \; \forall y \; \forall z$ (adjacent(x,y) $\land$ color(x,z) $\rightarrow \lnot$ color(y,z))
+        \item $\forall x \; \exists y \;$ color(x,y)
+      \end{enumerate}
+      \vspace{0.5em}
+    \item
+
+      \begin{enumerate}
+\item $\forall x \; (\text{label}(x, \text{W}) \rightarrow \lnot \text{contains}(x, \text{W}))$
+\item $\forall x \; (\text{label}(x, \text{Y}) \rightarrow \lnot \text{contains}(x, \text{Y}))$
+\item $\forall x \; (\text{label}(x, \text{B}) \rightarrow \lnot \text{contains}(x, \text{B}))$
+\item $\forall x \; (\text{contains}(x, \text{W}) \rightarrow \lnot \text{contains}(x, \text{Y}))$
+\item $\forall x \; (\text{contains}(x, \text{Y}) \rightarrow \lnot \text{contains}(x, \text{W}))$
+\item $\forall x \; (\text{contains}(x, \text{B}) \rightarrow (\text{contains}(x, \text{W}) \land \text{contains}(x, \text{Y})))$
+\item $\forall x \; (\text{obs}(x, \text{W}) \rightarrow (\text{contains}(x, \text{W}) \lor \text{contains}(x, \text{B})))$
+\item $\forall x \; (\text{obs}(x, \text{Y}) \rightarrow (\text{contains}(x, \text{Y}) \lor \text{contains}(x, \text{B})))$
+\item $\exists x \; \exists y \; \exists z \; (\text{contains}(x, \text{W}) \land \text{contains}(y, \text{Y}) \land \text{contains}(z, \text{B}) \land (x \neq y) \land (x \neq z) \land (y \neq z))$
+      \end{enumerate}
+      \vspace{0.5em}
+
+    \item 
+      \begin{enumerate}
+        \item $adjacent(x,y,a,b) \leftrightarrow (x=a \land (y=b+1 \lor y=b-1)) \lor (y=b \land (x=a+1 \lor x=a-1))$
+        \item $stench(x,y) \leftrightarrow \exists a,b(adjacent(x,y,a,b) \land wumpus(a,b))$
+        \item $breeze(x,y) \leftrightarrow \exists a,b(adjacent(x,y,a,b) \land pit(a,b))$
+        \item $safe(x,y) \leftrightarrow \lnot stench(x,y) \land \lnot breeze(x,y)$
+      \end{enumerate}
+      \vspace{0.5em}
+
+  \item 
+      \begin{enumerate}
+        \item $row(1) \land row(2) \land row(3) \land row(4)$
+        \item $col(1) \land col(2) \land col(3) \land col(4)$
+        \item $\forall x(queen(x,1) \to \lnot \exists y(queen(y,1) \land y \neq x))$
+        \item $\forall x(queen(x,2) \to \lnot \exists y(queen(y,2) \land y \neq x))$
+        \item $\forall x(queen(x,3) \to \lnot \exists y(queen(y,3) \land y \neq x))$
+        \item $\forall x(queen(x,4) \to \lnot \exists y(queen(y,4) \land y \neq x))$
+        \item $\forall x\forall y\forall a\forall b((queen(x,y) \land queen(a,b)) \to (x \neq a \land y \neq b \land x+y \neq a+b \land x-y \neq a-b))$      
+      \end{enumerate}
+      \vspace{0.5em}
 \end{enumerate}
 
 \end{quote}
