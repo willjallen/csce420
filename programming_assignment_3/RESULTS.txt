@@ -1,0 +1,13 @@
++----------------------------------------+-------------------------------------+-------------------+--------------------+
+|                  CLI                   |               Output                | DPLL calls w/ UCH | DPLL calls w/o UCH |
++----------------------------------------+-------------------------------------+-------------------+--------------------+
+| DPLL mapcolor.cnf                      | WAB NTG SAR QB NSWG VB TB           |               141 |                307 |
+| DPLL mapcolor.cnf QG                   | WAG NTB SAR QG NSWB VG TB           |                61 |                179 |
+| DPLL sammy.cnf O1Y O2W O3Y L1W L2Y L3B | C1B O1Y O2W C2W O3Y C3Y L1W L2Y L3B |                36 |                795 |
+| DPLL sammy.cnf O1W L2B L3B O2Y O3W L1W | O1W C1B O2Y C2Y O3W C3W L1W L2B L3B |                36 |                445 |
+| DPLL 3queens.cnf                       | Unsatisfiable                       |                25 |                 43 |
+| DPLL 4queens.cnf                       | Q31 Q12 Q43 Q24                     |                67 |                157 |
+| DPLL 5queens.cnf                       | Q51 Q32 Q13 Q44 Q25                 |               206 |                605 |
+| DPLL 6queens.cnf                       | Q51 Q32 Q13 Q64 Q45 Q26             |               555 |               2349 |
++----------------------------------------+-------------------------------------+-------------------+--------------------+
+

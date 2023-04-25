@@ -1,0 +1,9 @@
+# clauses (these come from doing implication elimination on rules)
+# room2 is accessible only if doors 1 and 2 are unlocked
+-door1unlocked -door2unlocked room2accessible
+weekend door1unlocked # (not weekend) -> door1unlocked
+-broken_door2 door2unlocked # broken_door2 -> door2unlocked
+-wednesday -weekend # wednesday -> (not weekend)
+# facts
+wednesday
+broken_door2

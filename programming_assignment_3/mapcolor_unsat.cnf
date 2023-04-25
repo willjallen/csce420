@@ -1,0 +1,77 @@
+# Force unsatisfiable
+QG
+VB
+
+# At least one color must be assigned to each region
+WAR WAG WAB
+NTR NTG NTB
+SAR SAG SAB
+QR QG QB
+NSWR NSWG NSWB
+VR VG VB
+TR TG TB
+
+# Neighboring regions cannot have the same color
+-NTR -WAR
+-NTG -WAG
+-NTB -WAB
+-NTR -SAR
+-NTG -SAG
+-NTB -SAB
+-WAR -SAR
+-WAG -SAG
+-WAB -SAB
+-QR -NTR
+-QG -NTG
+-QB -NTB
+-QR -SAR
+-QG -SAG
+-QB -SAB
+-NSWR -QR
+-NSWG -QG
+-NSWB -QB
+-NSWR -SAR
+-NSWG -SAG
+-NSWB -SAB
+-VR -NSWR
+-VG -NSWG
+-VB -NSWB
+-VR -SAR
+-VG -SAG
+-VB -SAB
+
+# No region can have more than one color assigned
+# Western Australia (WA)
+-WAR -WAG
+-WAR -WAB
+-WAG -WAB
+
+# Northern Territory (NT)
+-NTR -NTG
+-NTR -NTB
+-NTG -NTB
+
+# South Australia (SA)
+-SAR -SAG
+-SAR -SAB
+-SAG -SAB
+
+# Queensland (Q)
+-QR -QG
+-QR -QB
+-QG -QB
+
+# New South Wales (NSW)
+-NSWR -NSWG
+-NSWR -NSWB
+-NSWG -NSWB
+
+# Victoria (V)
+-VR -VG
+-VR -VB
+-VG -VB
+
+# Tasmania (T)
+-TR -TG
+-TR -TB
+-TG -TB
